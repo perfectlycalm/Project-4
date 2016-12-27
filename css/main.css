@@ -57,6 +57,7 @@ h1 {
 
 #search button {
 	font-family: 'Raleway', sans-serif;
+	margin-top: .5em;
 }
 
 ::-webkit-input-placeholder {
@@ -64,7 +65,7 @@ h1 {
 }
 
 #no-match {
-	margin-top: 20%;
+	margin-top: 30%;
 }
 
 
@@ -99,15 +100,16 @@ h1 {
   	cursor: default;
 }
 
+#lightcase-overlay,
+#lightcase-loading,
+#lightcase-case,
+#lightcase-nav {
+	display: none;
+}
 
 
+@media all and (min-width: 640px) {
 
-
-@media all and (min-width: 600px) {
-
-/** General styles **************/
-
-	
 
 /** Header/Footer **************/
 	
@@ -116,13 +118,19 @@ h1 {
 		padding: 3% 0;
 	}
 
+/** Search **************/
+	
+	#no-match {
+		margin-top: 15%;
+	}
 
 /** Gallery **************/
 
 	#gallery {
 		margin-top: 3em;
+		margin-bottom: 3em;
 	}
-	#gallery h2,
+	
 	#gallery p {
 		display: none;
 	}
@@ -133,11 +141,53 @@ h1 {
 
 	#gallery li {
 		display: inline-block;
-		margin: 0 1em;
+		margin: 0 1em 2em 1em;
 	}
 
 	#gallery a {
 	pointer-events: initial;
   	cursor: initial;
-}
+	}
+
+	#gallery {
+		max-width: 1150px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+
+/** Lightbox Styles **************/
+
+	.lightcase-icon-prev:before {
+	  content: '\2039';
+	}
+
+	.lightcase-icon-next:before {
+	  content: '\203A';
+	}
+
+	.lightcase-icon-close:before {
+	  content: '\00D7';
+	}
+
+	#lightcase-info {
+		max-width: 600px;
+		width: 100%;
+		margin: auto;
+		position: static;
+		color: #eee;
+	}
+
+	#lightcase-info #lightcase-title,
+	#lightcase-info #lightcase-sequenceInfo {
+		color: #eee;
+	}
+
+	#lightcase-overlay,
+	#lightcase-loading,
+	#lightcase-case,
+	#lightcase-nav {
+	display: initial;
+	}
+
 }

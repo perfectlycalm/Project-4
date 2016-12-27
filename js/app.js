@@ -3,8 +3,12 @@
 	var searchString = "";
 
 
-
 // Functions
+
+	// Initialize lightbox
+	function initializeLightbox (){
+		$('a[data-rel^=lightcase]').lightcase({});
+	}
 
 	// Appends all images to the document for which show is true
 	function loadGallery (gallery) {
@@ -16,19 +20,17 @@
 			var caption = gallery[i].caption;
 			var show = gallery[i].show;
 			var linktoFullSize = gallery[i].fullSize;
-			var lightboxIdentifier = 'image-' + i+1;
 
 			if (show) {
 				$('#gallery').append('<li><a href="' + linktoFullSize + '"' + 
-					'data-lightbox="' + lightboxIdentifier + '"' +
-					'data-title="' + caption + '">' +
+					'data-rel="lightcase:myCollection"' +
+					'title="' + caption + '">' +
 					'<img src="' + image + '"></a>' + 
 					'<h2>' + title + '</h2>' +
 					'<p>' + caption + '</p></li>');
 			}
 		}
-	};
-
+	}
 
 	// Clears all images and messages from the document and sets all show fields to false
 	function clearGallery (gallery) {
@@ -41,7 +43,6 @@
 		}
 
 	}
-
 
 	// Iterates through the gallery captions and sets show to true if the user's input matches
 	// any text in the caption.  Inform the user if there are no matches
@@ -61,7 +62,6 @@
 		}
 	}
 
-
 	// Clears current search results from the document, sets input field to blank, 
 	//   sets all show fields to true and loads the gallery
 	function resetGallery (gallery) {
@@ -75,11 +75,8 @@
 		}
 
 		loadGallery(imageGallery);
-	};
-
-
-	
-
+		initializeLightbox();
+	}
 
 
 // Event Listeners
@@ -91,34 +88,25 @@
 		searchString = $('#search-field').val().toLowerCase();
 		searchGallery(imageGallery);
 		loadGallery(imageGallery);
+		initializeLightbox();
 	});
-
-	
-	// When user leaves the input field, restore the original gallery
-	// $('#search-field').blur(function(){	
-	// 	resetGallery(imageGallery);
-	// });
 
 	// When user clicks the reset button, restore the original gallery
 	$('button').click(function(){	
 		resetGallery(imageGallery);
 	});
+	
+	// Hide the lightbox when the browser window is reduced to less than 640px
+	$(window).resize(function(){
+		if ($(window).width() < 640) {
+			$('html').removeClass('lightcase-open');
+		}
+	});
 
 
-
-
-
-
+// Initialize gallery
 loadGallery(imageGallery);
 
-
-lightbox.option({
-      'resizeDuration': 200,
-      'wrapAround': true,
-      'alwaysShowNavOnTouchDevices': true
-});
-
-// If mobile, disable lightbox
-
-
-// If desktop, enable lightbox	
+// Initialize lightbox
+initializeLightbox();
+	
